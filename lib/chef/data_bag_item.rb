@@ -78,7 +78,7 @@ class Chef
         raise Exceptions::ValidationFailed, "Data Bag Items must contain a Hash or Mash!"
       end
       validate_id!(new_data["id"])
-      @raw_data = new_data
+      new_data.class == Mash ? @raw_data = new_data : @raw_data = Mash.new(new_data)
     end
 
     def data_bag(arg=nil)
